@@ -1,0 +1,188 @@
+{
+  "cases": [
+    {
+      "url": "https://claude.ai/oauth/mcp-oauth-client-metadata",
+      "verdict": "accept"
+    },
+    {
+      "url": "https://claude.ai/oauth/mcp-oauth-client-metadata/",
+      "verdict": "accept"
+    },
+    {
+      "url": "https://claude.ai:8443/oauth/x",
+      "verdict": "accept"
+    },
+    {
+      "url": "http://claude.ai/oauth/x",
+      "verdict": "reject"
+    },
+    {
+      "url": "ftp://claude.ai/x",
+      "verdict": "reject"
+    },
+    {
+      "url": "not-a-url",
+      "verdict": "reject"
+    },
+    {
+      "url": "https://claude.ai",
+      "verdict": "reject"
+    },
+    {
+      "url": "https://claude.ai/",
+      "verdict": "reject"
+    },
+    {
+      "url": "https://user@claude.ai/x",
+      "verdict": "reject"
+    },
+    {
+      "url": "https://user:pw@claude.ai/x",
+      "verdict": "reject"
+    },
+    {
+      "url": "https://claude.ai:99999/oauth/x",
+      "verdict": "reject"
+    },
+    {
+      "url": "https://claude.ai/x?y=1",
+      "verdict": "reject"
+    },
+    {
+      "url": "https://claude.ai/x#frag",
+      "verdict": "reject"
+    },
+    {
+      "url": "https://127.0.0.1/x",
+      "verdict": "accept"
+    },
+    {
+      "url": "https://claude.ai/a/../b",
+      "verdict": "reject"
+    },
+    {
+      "url": "https://claude.ai/./b",
+      "verdict": "reject"
+    },
+    {
+      "url": "https://claude.ai/a/%2e%2e/b",
+      "verdict": "reject"
+    },
+    {
+      "url": "https://claude.ai/%2E/b",
+      "verdict": "reject"
+    },
+    {
+      "url": "https://claude.ai/a/%2E%2e/b",
+      "verdict": "reject"
+    },
+    {
+      "url": "https://claude.ai/a/%252e%252e/b",
+      "verdict": "reject"
+    },
+    {
+      "url": "https://claude.ai/a/%252E/b",
+      "verdict": "reject"
+    },
+    {
+      "url": "https://claude.ai/a/%25252e/b",
+      "verdict": "reject"
+    },
+    {
+      "url": "https://claude.ai/a/%252F%252F%252e%252e%252F/b",
+      "verdict": "reject"
+    },
+    {
+      "url": "https://claude.ai/a/%2F/b",
+      "verdict": "reject"
+    },
+    {
+      "url": "https://claude.ai/a/%5C/b",
+      "verdict": "reject"
+    },
+    {
+      "url": "https://claude.ai/a/..%2f/b",
+      "verdict": "reject"
+    },
+    {
+      "url": "https://claude.ai/a/100%25/b",
+      "verdict": "reject"
+    },
+    {
+      "url": "https://claude.ai/a/%25FF/b",
+      "verdict": "reject"
+    },
+    {
+      "url": "https://claude.ai/a/%25C0%25AE/b",
+      "verdict": "reject"
+    },
+    {
+      "url": "https://claude.ai/a/%80/b",
+      "verdict": "reject"
+    },
+    {
+      "url": "https://claude.ai/a/%/b",
+      "verdict": "reject"
+    },
+    {
+      "url": "https://claude.ai/a/%2/b",
+      "verdict": "reject"
+    },
+    {
+      "url": "https://claude.ai/a/%2545/b",
+      "verdict": "accept"
+    },
+    {
+      "url": "https://claude.ai/a/%E2%82%AC/b",
+      "verdict": "accept"
+    },
+    {
+      "url": "https://claude.ai/%20/b",
+      "verdict": "accept"
+    },
+    {
+      "url": "https://127.0.0.1\\claude.ai/x",
+      "verdict": "reject"
+    },
+    {
+      "url": "https://claude.ai\\evil.example/x",
+      "verdict": "reject"
+    },
+    {
+      "url": "https://claude.ai/a\\b/c",
+      "verdict": "reject"
+    },
+    {
+      "url": "https://x.local%68ost/a",
+      "verdict": "reject"
+    },
+    {
+      "url": "https://\uff45\uff58\uff41\uff4d\uff50\uff4c\uff45.com/a",
+      "verdict": "reject"
+    },
+    {
+      "url": "https://xn--bcher-kva.example/a",
+      "verdict": "accept"
+    },
+    {
+      "url": "https://claude.ai/ ",
+      "verdict": "reject"
+    },
+    {
+      "url": "https://claude.ai/x ",
+      "verdict": "reject"
+    },
+    {
+      "url": "https://claude.ai/\t%252e\t/b",
+      "verdict": "reject"
+    },
+    {
+      "url": "https://claude.ai/\u0000",
+      "verdict": "reject"
+    },
+    {
+      "url": "https://claude.ai/a b/c",
+      "verdict": "reject"
+    }
+  ]
+}
