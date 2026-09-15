@@ -68,13 +68,6 @@ outputs.json
 cdk.outputs.json
 .playwright-mcp/
 
-# Local design and review artefacts: the README and the module docstrings are the
-# documentation of record for this sample. These are working notes and review
-# deliverables, kept out of the published repository.
-docs/
-docs.zip
-implementation_plan/
-
 # Build outputs
 cdk.out/
 .venv/
