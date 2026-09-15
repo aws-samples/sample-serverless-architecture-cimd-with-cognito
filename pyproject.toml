@@ -1,0 +1,30 @@
+[project]
+name = "cimd-cognito-mcp-lambdas"
+version = "0.1.0"
+description = "Lambda code for the CIMD-with-Cognito sample (FastMCP resource server, CIMD proxy, registrar)"
+requires-python = ">=3.12,<3.13"
+dependencies = []
+
+[dependency-groups]
+mcp-server = ["fastmcp>=4.0.3,<5", "mangum>=0.22,<1"]
+cimd-proxy = []
+registrar = []
+dev = ["pytest>=8", "pytest-asyncio>=0.24", "moto[dynamodb,ssm,cognitoidp]>=5", "pyjwt[crypto]>=2.9", "httpx>=0.28", "ruff>=0.6", "boto3>=1.35"]
+
+[tool.uv]
+package = false
+
+[tool.pytest.ini_options]
+testpaths = ["tests/unit"]
+pythonpath = ["lambdas", "lambdas/shared"]
+asyncio_mode = "auto"
+
+[tool.ruff]
+line-length = 120
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "W", "I", "UP", "B", "SIM", "RUF"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["RUF059", "RUF012"]  # fixture tuples unpacked in full for readability; class-level defaults in test fakes
