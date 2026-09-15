@@ -1,0 +1,80 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+
+# Editors / IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Node / TypeScript (CDK)
+node_modules/
+dist/
+*.js.map
+*.d.ts
+!jest.config.js
+npm-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# AWS CDK
+cdk.out/
+cdk.context.json
+.cdk.staging/
+
+# AWS SAM
+.aws-sam/
+
+# Python (Lambda handlers, tooling)
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+
+# Test and coverage output
+coverage/
+.coverage
+.nyc_output/
+htmlcov/
+
+# Logs and temp
+*.log
+tmp/
+.tmp/
+
+# Local credential and browser-automation artefacts
+*.pem
+token.json
+tokens.json
+refresh.json
+pkce.json
+callback.json
+outputs.json
+cdk.outputs.json
+.playwright-mcp/
+
+# Local design and review artefacts: the README and the module docstrings are the
+# documentation of record for this sample. These are working notes and review
+# deliverables, kept out of the published repository.
+docs/
+docs.zip
+implementation_plan/
+
+# Build outputs
+cdk.out/
+.venv/

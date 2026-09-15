@@ -1,0 +1,26 @@
+version: 2
+updates:
+  # CDK and test tooling. package-lock.json is the audited artefact.
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+    groups:
+      aws-cdk:
+        patterns: ["aws-cdk", "aws-cdk-lib", "cdk-nag", "constructs"]
+      dev-tooling:
+        patterns: ["jest", "ts-jest", "typescript", "@types/*"]
+
+  # Lambda runtime dependencies. fastmcp carries the JWT verification path, so security updates
+  # here matter more than anywhere else in the repo; uv.lock is the audited artefact.
+  - package-ecosystem: uv
+    directory: /
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
