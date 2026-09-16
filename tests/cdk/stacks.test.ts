@@ -56,6 +56,23 @@ describe("default profile", () => {
     expect(cfg.api.revalidatingRouteThrottle.rateLimit).toBeLessThan(cfg.api.throttle.rateLimit);
   });
 
+  // A RouteSettings key is validated against the live API, not merely stored: a stage created before the route
+  // it names fails with "Unable to find Route by key GET /authorize". Nothing in the template references those
+  // routes from the stage, so without an explicit DependsOn CloudFormation may order the stage first — which is
+  // what a first deploy into an empty account does. Assert the edge exists for every throttled route key.
+  test("the stage depends on every route named in RouteSettings", () => {
+    const t = Template.fromStack(api);
+    const stage = Object.values(t.findResources("AWS::ApiGatewayV2::Stage"))[0] as any;
+    const routeKeys: string[] = Object.keys(stage.Properties.RouteSettings);
+    const dependsOn: string[] = stage.DependsOn ?? [];
+    const routes = t.findResources("AWS::ApiGatewayV2::Route");
+    const dependedRouteKeys = dependsOn
+      .filter((id) => id in routes)
+      .map((id) => (routes[id] as any).Properties.RouteKey);
+    expect(routeKeys.length).toBeGreaterThan(0);
+    expect(dependedRouteKeys.sort()).toEqual(routeKeys.sort());
+  });
+
   test("no Lambda environment variable contains a URL host", () => {
     const fns = Template.fromStack(api).findResources("AWS::Lambda::Function");
     for (const fn of Object.values(fns)) {

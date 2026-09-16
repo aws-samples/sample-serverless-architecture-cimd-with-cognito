@@ -150,10 +150,18 @@ export class ApiStack extends cdk.Stack {
     this.httpApi.addRoutes({ path: "/.well-known/oauth-protected-resource/{proxy+}", methods: [M.GET], integration: mcpIntegration });
     this.httpApi.addRoutes({ path: "/.well-known/oauth-authorization-server", methods: [M.GET], integration: proxyIntegration });
     this.httpApi.addRoutes({ path: "/.well-known/openid-configuration", methods: [M.GET], integration: proxyIntegration });
-    this.httpApi.addRoutes({ path: "/authorize", methods: [M.GET], integration: proxyIntegration });
-    this.httpApi.addRoutes({ path: "/consent", methods: [M.POST], integration: proxyIntegration });
-    this.httpApi.addRoutes({ path: "/token", methods: [M.POST], integration: proxyIntegration });
+    const throttledRoutes = [
+      ...this.httpApi.addRoutes({ path: "/authorize", methods: [M.GET], integration: proxyIntegration }),
+      ...this.httpApi.addRoutes({ path: "/consent", methods: [M.POST], integration: proxyIntegration }),
+      ...this.httpApi.addRoutes({ path: "/token", methods: [M.POST], integration: proxyIntegration }),
+    ];
     this.httpApi.addRoutes({ path: "/revoke", methods: [M.POST], integration: proxyIntegration });
+    // RouteSettings keys are validated by the service, not just stored: creating the stage before the routes it
+    // names fails with "Unable to find Route by key GET /authorize". Nothing in the template references the
+    // routes from the stage (the keys are plain strings), so CloudFormation is free to order the stage first —
+    // which is exactly what happens on a first deploy into an empty account. The dependency is one-way: routes
+    // depend on the Api, never on the Stage, so this adds no cycle.
+    for (const route of throttledRoutes) cfnStage.node.addDependency(route);
     if (cfg.testClient.enabled) {
       this.httpApi.addRoutes({ path: "/test-client/{proxy+}", methods: [M.GET], integration: proxyIntegration });
     }
